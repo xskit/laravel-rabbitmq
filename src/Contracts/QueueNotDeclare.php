@@ -6,12 +6,12 @@
  * Time: 16:06
  */
 
-namespace XsPkg\LaravelQueueRabbitMQ\Contracts;
+namespace XsPkg\LaravelRabbitMQ\Contracts;
 
 /**
  * 不声明队列
  * Interface QueueNotDeclare
- * @package XsPkg\LaravelQueueRabbitMQ\Contracts
+ * @package XsPkg\LaravelRabbitMQ\Contracts
  */
 interface QueueNotDeclare
 {

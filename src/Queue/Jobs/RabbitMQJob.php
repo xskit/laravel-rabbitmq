@@ -1,6 +1,6 @@
 <?php
 
-namespace XsPkg\LaravelQueueRabbitMQ\Queue\Jobs;
+namespace XsPkg\LaravelRabbitMQ\Queue\Jobs;
 
 use Exception;
 use Illuminate\Support\Str;
@@ -11,7 +11,7 @@ use Illuminate\Queue\Jobs\JobName;
 use Illuminate\Container\Container;
 use Illuminate\Database\DetectsDeadlocks;
 use Illuminate\Contracts\Queue\Job as JobContract;
-use XsPkg\LaravelQueueRabbitMQ\Queue\RabbitMQQueue;
+use XsPkg\LaravelRabbitMQ\Queue\RabbitMQQueue;
 
 class RabbitMQJob extends Job implements JobContract
 {

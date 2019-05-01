@@ -1,6 +1,6 @@
 {
-  "name": "xspkg/laravel-queue-rabbitmq",
-  "description": "采用 RabbitMQ 结合 laravel 队列的监听，通过Job协作,完成 分布式 服务的通信功能。",
+  "name": "xspkg/laravel-rabbitmq",
+  "description": "采用laravel queue的方式监听 RabbitMQ 消息，完成 分布式 服务的通信功能。",
   "authors": [
     {
       "name": "兴顺",
@@ -8,7 +8,7 @@
     }
   ],
   "require": {
-    "php": "^7.1.3",
+    "php": "^7.1",
     "ext-json": "*",
     "illuminate/support": "5.7.*|5.8.*",
     "illuminate/queue": "5.7.*|5.8.*",
@@ -16,6 +16,7 @@
     "queue-interop/amqp-interop": "0.8.*"
   },
   "require-dev": {
+    "phpunit/phpunit": "7.*|6.*",
     "illuminate/events": "5.7.*|5.8.*"
   },
   "autoload": {
@@ -29,12 +30,12 @@
     }
   },
   "extra": {
-    "branch-alias":{
+    "branch-alias": {
       "dev-master": "1.0.x-dev"
     },
     "laravel": {
       "providers": [
-        "XsPkg\\LaravelQueueRabbitMQ\\QueueRabbitMQServiceProvider"
+        "XsPkg\\LaravelRabbitMQ\\RabbitMQServiceProvider"
       ]
     }
   },

@@ -1,9 +1,9 @@
 <?php
 
-namespace XsPkg\LaravelQueueRabbitMQ\Queue;
+namespace XsPkg\LaravelRabbitMQ\Queue;
 
-use XsPkg\LaravelQueueRabbitMQ\Contracts\QueueAutoDeclare;
-use XsPkg\LaravelQueueRabbitMQ\Contracts\QueueNotDeclare;
+use XsPkg\LaravelRabbitMQ\Contracts\QueueAutoDeclare;
+use XsPkg\LaravelRabbitMQ\Contracts\QueueNotDeclare;
 use Illuminate\Queue\InvalidPayloadException;
 use RuntimeException;
 use Illuminate\Queue\Queue;
@@ -15,7 +15,7 @@ use Interop\Amqp\AmqpContext;
 use Interop\Amqp\AmqpMessage;
 use Interop\Amqp\Impl\AmqpBind;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
-use XsPkg\LaravelQueueRabbitMQ\Queue\Jobs\RabbitMQJob;
+use XsPkg\LaravelRabbitMQ\Queue\Jobs\RabbitMQJob;
 
 class RabbitMQQueue extends Queue implements QueueContract
 {

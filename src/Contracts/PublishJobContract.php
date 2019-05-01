@@ -6,7 +6,7 @@
  * Time: 10:05
  */
 
-namespace XsPkg\LaravelQueueRabbitMQ\Contracts;
+namespace XsPkg\LaravelRabbitMQ\Contracts;
 
 
 use Illuminate\Contracts\Queue\ShouldQueue;

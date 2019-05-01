@@ -6,12 +6,12 @@
  * Time: 16:05
  */
 
-namespace XsPkg\LaravelQueueRabbitMQ\Contracts;
+namespace XsPkg\LaravelRabbitMQ\Contracts;
 
 /**
  * 队列不存在时，自动声明队列并绑定到交换机
  * Interface QueueAutoDeclare
- * @package XsPkg\LaravelQueueRabbitMQ\Contracts
+ * @package XsPkg\LaravelRabbitMQ\Contracts
  */
 interface QueueAutoDeclare
 {
