@@ -18,7 +18,7 @@ class WorkCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'rmq:work
+    protected $signature = 'rabbitmq:work
                             {connection? : 队列连接的名称}
                             {--queue= : 工作队列名}
                             {--routing= : 消息路由}
