@@ -19,6 +19,10 @@ class RabbitMQServiceProvider extends ServiceProvider
         $this->commands([
             WorkCommand::class
         ]);
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/rabbitmq.php', 'queue.connections.rabbitmq'
+        );
     }
 
     /**
