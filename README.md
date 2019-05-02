@@ -8,8 +8,8 @@ comooser require xspkg/laravel-rabbitmq
 添加配置到 `config/queue.php` 设置队列rabbitmq的连接方式
 
 开始队列监听  
-比laravel队列 多一个配置项 `--routing` 做为rabbitmq 的 routing_key配置
-
+比原laravel队列 多一个配置项 `--routing` 做为rabbitmq 的 routing_key配置
+使用方式
 ```
-$ php artisn rabbitmq:work [队列名] [--routing=路由名]
+$ rabbitmq:work [options] [--] [<connection>] [--routing=<key>]
 ```
