@@ -53,29 +53,6 @@ class RabbitMQQueue extends Queue implements QueueContract
         $this->sleepOnError = $config['sleep_on_error'] ?? 5;
     }
 
-    /**
-     * Create a payload string from the given job and data.
-     *
-     * @param  string $job
-     * @param  mixed $data
-     * @return string
-     *
-     * @throws \Illuminate\Queue\InvalidPayloadException
-     */
-    protected function createPayload($job, $data = '')
-    {
-        $this->queueOptionsHandle($job);
-        $payload = json_encode($this->createPayloadArray($job, $data));
-
-        if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new InvalidPayloadException(
-                'Unable to JSON encode payload. Error code: ' . json_last_error()
-            );
-        }
-
-        return $payload;
-    }
-
     private function queueOptionsHandle($job)
     {
         if ($job instanceof QueueNotDeclare) {
@@ -99,7 +76,7 @@ class RabbitMQQueue extends Queue implements QueueContract
     /** {@inheritdoc} */
     public function push($job, $data = '', $queue = null)
     {
-        return $this->pushRaw($this->createPayload($job, $data), $queue, []);
+        return $this->pushRaw($this->createPayload($job, $queue, $data), $queue, []);
     }
 
     /** {@inheritdoc} */
@@ -291,9 +268,9 @@ class RabbitMQQueue extends Queue implements QueueContract
         return $queueName ?: $this->queueName;
     }
 
-    protected function createPayloadArray($job, $data = '')
+    protected function createPayloadArray($job, $queue, $data = '')
     {
-        return array_merge(parent::createPayloadArray($job, $data), [
+        return array_merge(parent::createPayloadArray($job, $queue, $data), [
             'id' => $this->getRandomId(),
         ]);
     }

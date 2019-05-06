@@ -22,7 +22,7 @@ $ php artisan rabbitmq:work --help
 - 场景一
     - 后台处理长时任务  
        
-        1. 创建 laravel 队列任务 或 事件处理，发布到 RabbitMQ （默认配置连接名：rabbitmq）连接。使用说明可查看 [Laravel 官方手册](https://laravel.com/docs/5.6)。
+        1. 创建 laravel 队列任务 或 事件处理，发布到 RabbitMQ （默认配置连接名：rabbitmq）连接。使用说明可查看 [Laravel 官方手册](https://laravel.com/docs/5.8)。
         2. 执行队列监听命令：
             ```
             // 连接到 rabbitmq ,监听 default 队列 ，路由 接收所有消息
