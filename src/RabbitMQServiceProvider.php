@@ -1,11 +1,11 @@
 <?php
 
-namespace XsPkg\LaravelRabbitMQ;
+namespace XsKit\LaravelRabbitMQ;
 
-use XsPkg\LaravelRabbitMQ\Console\WorkCommand;
+use XsKit\LaravelRabbitMQ\Console\WorkCommand;
 use Illuminate\Queue\QueueManager;
 use Illuminate\Support\ServiceProvider;
-use XsPkg\LaravelRabbitMQ\Queue\Connectors\RabbitMQConnector;
+use XsKit\LaravelRabbitMQ\Queue\Connectors\RabbitMQConnector;
 
 class RabbitMQServiceProvider extends ServiceProvider
 {

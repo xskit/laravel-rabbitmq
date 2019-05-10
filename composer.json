@@ -1,5 +1,5 @@
 {
-  "name": "xspkg/laravel-rabbitmq",
+  "name": "xskit/laravel-rabbitmq",
   "description": "采用laravel queue的方式监听 RabbitMQ 消息，完成 分布式 服务的通信功能。",
   "authors": [
     {
@@ -21,7 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "XsPkg\\LaravelRabbitMQ\\": "src/"
+      "XsKit\\LaravelRabbitMQ\\": "src/"
     }
   },
   "autoload-dev": {
@@ -35,7 +35,7 @@
     },
     "laravel": {
       "providers": [
-        "XsPkg\\LaravelRabbitMQ\\RabbitMQServiceProvider"
+        "XsKit\\LaravelRabbitMQ\\RabbitMQServiceProvider"
       ]
     }
   },

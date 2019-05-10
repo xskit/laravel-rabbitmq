@@ -1,6 +1,6 @@
 <?php
 
-namespace XsPkg\LaravelRabbitMQ\Queue\Connectors;
+namespace XsKit\LaravelRabbitMQ\Queue\Connectors;
 
 use Illuminate\Support\Arr;
 use Interop\Amqp\AmqpContext;
@@ -11,7 +11,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Queue\Events\WorkerStopping;
 use Enqueue\AmqpTools\RabbitMqDlxDelayStrategy;
 use Illuminate\Queue\Connectors\ConnectorInterface;
-use XsPkg\LaravelRabbitMQ\Queue\RabbitMQQueue;
+use XsKit\LaravelRabbitMQ\Queue\RabbitMQQueue;
 use Interop\Amqp\AmqpConnectionFactory as InteropAmqpConnectionFactory;
 use Enqueue\AmqpLib\AmqpConnectionFactory as EnqueueAmqpConnectionFactory;
 
