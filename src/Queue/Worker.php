@@ -6,7 +6,7 @@
  * Time: 18:39
  */
 
-namespace XsPkg\LaravelRabbitMQ\Queue;
+namespace XsKit\LaravelRabbitMQ\Queue;
 
 use Exception;
 use Throwable;

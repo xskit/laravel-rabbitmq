@@ -1,8 +1,8 @@
 <?php
 
-namespace XsPkg\LaravelRabbitMQ\Console;
+namespace XsKit\LaravelRabbitMQ\Console;
 
-use XsPkg\LaravelRabbitMQ\Queue\Worker;
+use XsKit\LaravelRabbitMQ\Queue\Worker;
 use Illuminate\Queue\WorkerOptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
