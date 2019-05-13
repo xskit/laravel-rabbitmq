@@ -22,7 +22,7 @@
   },
   "autoload": {
     "psr-4": {
-      "XsPkg\\LaravelRabbitMQ\\": "src/"
+      "XsKit\\LaravelRabbitMQ\\": "src/"
     }
   },
   "autoload-dev": {
@@ -36,7 +36,7 @@
     },
     "laravel": {
       "providers": [
-        "XsPkg\\LaravelRabbitMQ\\RabbitMQServiceProvider"
+        "XsKit\\LaravelRabbitMQ\\RabbitMQServiceProvider"
       ]
     }
   },
