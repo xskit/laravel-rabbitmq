@@ -1,6 +1,6 @@
 ## 安装
 ```
-comooser require xskit/laravel-rabbitmq
+composer require xskit/laravel-rabbitmq
 ```
 ## 使用方法
 
