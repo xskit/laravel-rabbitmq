@@ -4,7 +4,6 @@ namespace XsKit\LaravelRabbitMQ\Queue;
 
 use XsKit\LaravelRabbitMQ\Contracts\QueueAutoDeclare;
 use XsKit\LaravelRabbitMQ\Contracts\QueueNotDeclare;
-use Illuminate\Queue\InvalidPayloadException;
 use RuntimeException;
 use Illuminate\Queue\Queue;
 use Illuminate\Support\Str;
@@ -53,6 +52,15 @@ class RabbitMQQueue extends Queue implements QueueContract
         $this->sleepOnError = $config['sleep_on_error'] ?? 5;
     }
 
+    protected function createPayload($job, $queue, $data = '')
+    {
+
+        $this->queueOptionsHandle($job);
+
+        return parent::createPayload($job, $queue, $data);
+
+    }
+
     private function queueOptionsHandle($job)
     {
         if ($job instanceof QueueNotDeclare) {
@@ -64,7 +72,11 @@ class RabbitMQQueue extends Queue implements QueueContract
         }
     }
 
-    /** {@inheritdoc} */
+    /**
+     * 声明队列
+     * @param null $queueName 队列名
+     * @return int
+     */
     public function size($queueName = null): int
     {
         /** @var AmqpQueue $queue */
@@ -203,6 +215,7 @@ class RabbitMQQueue extends Queue implements QueueContract
     protected function declareEverything(string $queueName = null): array
     {
         $queueName = $this->getQueueName($queueName);
+        //未设置交换机名，默认队列名
         $exchangeName = $this->exchangeOptions['name'] ?: $queueName;
 
         $topic = $this->context->createTopic($exchangeName);
@@ -219,6 +232,7 @@ class RabbitMQQueue extends Queue implements QueueContract
         }
 
         if ($this->exchangeOptions['declare'] && !in_array($exchangeName, $this->declaredExchanges, true)) {
+            //声明交换机
             $this->context->declareTopic($topic);
 
             $this->declaredExchanges[] = $exchangeName;

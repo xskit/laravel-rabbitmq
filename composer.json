@@ -9,14 +9,15 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^7.1",
+    "php": "^7.1.3",
     "ext-json": "*",
     "laravel/framework": "5.7.*|5.8.*",
     "enqueue/amqp-lib": "0.9.*",
     "queue-interop/amqp-interop": "0.8.*"
   },
   "require-dev": {
-    "phpunit/phpunit": "7.*|6.*"
+    "phpunit/phpunit": "7.*|6.*",
+    "laravel/horizon": "^3.0"
   },
   "autoload": {
     "psr-4": {

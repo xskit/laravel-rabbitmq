@@ -17,6 +17,11 @@ class Worker extends \Illuminate\Queue\Worker
 
     protected $routingKey;
 
+    /**
+     * set topic exchange routing key
+     * @param $key
+     * @return $this
+     */
     public function setRoutingKey($key)
     {
         $this->routingKey = $key;

@@ -17,19 +17,27 @@ $ php artisan rabbitmq:work [options] [--] [<connection>] [--routing=<key>]
 ```
 $ php artisan rabbitmq:work --help
 ```
-
+## 消息处理的方式
+- 消息确认机制的说明，与 Laravel 队列 Job 的处理保持一致
+    - Job 执行失败时，自动确认消息后进行消息重发
+    - Job 执行成功时，消息自动确认
+    - 在 Job 中 主动删除消息，就可以确认进行消息确认
+    ```php
+     $job->delete();
+    ```
+    
 ## 使用示例
 - 场景一
     - 后台处理长时任务  
-       
-        1. 创建 laravel 队列任务 或 事件处理，发布到 RabbitMQ （默认配置连接名：rabbitmq）连接。使用说明可查看 [Laravel 官方手册](https://laravel.com/docs/5.8)。
-                       
-        2. 执行队列监听命令：
+      
+        1. 创建 laravel 队列任务，发布到 RabbitMQ （默认配置连接名：rabbitmq）连接。使用说明可查看 [Laravel 官方手册](https://laravel.com/docs/5.8/queues)。
+           
+        2. 区别在执行队列监听命令：
             ```
             // 连接到 rabbitmq ,监听 default 队列 ，接收当前队列名为路由的消息
             $ php artisan rabbitmq:work
-            ```  
-                 
+            ```
+    
 - 场景二
     - 分布式消息处理，例如：
     
@@ -63,10 +71,10 @@ $ php artisan rabbitmq:work --help
               $this->$data = $data;       
           }
       }
-       ```
-       
+      ```
+      
     - 在 B 项目上接收处理作业，创建一样的同名job：
-       
+      
         - 第一步 
         ```bash
         $ php artisan make:job OneJob
@@ -99,5 +107,5 @@ $ php artisan rabbitmq:work --help
         # 处理 队列名为default ,接收 b.queue 路由消息 
         $ php artisan rabbitmq:work --routing=b.queue
         ```
-      
+    
        

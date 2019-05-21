@@ -11,6 +11,11 @@ namespace XsKit\LaravelRabbitMQ\Contracts;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+/**
+ * 生产信息
+ * Class PublishJobContract
+ * @package XsKit\LaravelRabbitMQ\Contracts
+ */
 abstract class PublishJobContract implements ShouldQueue
 {
 }
