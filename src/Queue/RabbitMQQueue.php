@@ -2,6 +2,8 @@
 
 namespace XsKit\LaravelRabbitMQ\Queue;
 
+use Interop\Amqp\AmqpConsumer;
+use Interop\Queue\Consumer;
 use XsKit\LaravelRabbitMQ\Contracts\QueueAutoDeclare;
 use XsKit\LaravelRabbitMQ\Contracts\QueueNotDeclare;
 use RuntimeException;
@@ -166,6 +168,8 @@ class RabbitMQQueue extends Queue implements QueueContract
             list($queue) = $this->declareEverything($queueName);
 
             $consumer = $this->context->createConsumer($queue);
+            // Messages are automatically redistributed when a job fails, so no ack mode is required to turn on.
+            $consumer->addFlag(AmqpConsumer::FLAG_NOACK);
 
             if ($message = $consumer->receiveNoWait()) {
                 return new RabbitMQJob($this->container, $this, $consumer, $message);
