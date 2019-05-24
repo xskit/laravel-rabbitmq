@@ -124,7 +124,7 @@ $ php artisan rabbitmq:work --help
              }
          }
         ```
-        - 第三步，启动处理进程：
+        - 第三步，启动消息者消息处理进程：
         ```bash
         # 处理 队列名为default ,接收 b.queue 路由消息 
         $ php artisan rabbitmq:work --routing=b.queue
