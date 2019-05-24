@@ -3,8 +3,16 @@
 comooser require xspkg/laravel-rabbitmq
 ```
 ## 使用方法
+### Laravel
+安装后使用 Laravel 自动发现,包将自动注册自己。
 
-安装后包将自动注册自己使用 Laravel 自动发现。
+### Lumen
+手动注册服务提供者
+```php
+$app->register(XsKit\LaravelRabbitMQ\RabbitMQServiceProvider::class);
+```
+
+
 修改配置可以根据 `config/queue.php` 配置到 `.env`文件中，或者添加配置到 `config/queue.php` 进行配置修改
 
 开始队列监听  
