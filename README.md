@@ -12,10 +12,11 @@ comooser require xspkg/laravel-rabbitmq
 $app->register(XsKit\LaravelRabbitMQ\RabbitMQServiceProvider::class);
 ```
 
+### 配置
 
 修改配置可以根据 `config/queue.php` 配置到 `.env`文件中，或者添加配置到 `config/queue.php` 进行配置修改
 
-开始队列监听  
+### 开始队列监听  
 比原laravel队列 多一个配置项 `--routing` 做为rabbitmq 的 routing_key配置
 - 使用方式
 ```
