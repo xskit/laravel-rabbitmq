@@ -289,7 +289,7 @@ class RabbitMQQueue extends Queue implements QueueContract
         }
 
         if ($this->queueOptions['bind']) {
-            $this->context->bind(new AmqpBind($queue, $topic, $this->routingKey ?: $queue->getQueueName()));
+            $this->context->bind(new AmqpBind($queue, $topic, $this->optionRoutingKey ?: $queue->getQueueName()));
         }
 
         return [$queue, $topic];
