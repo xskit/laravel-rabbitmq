@@ -4,10 +4,19 @@ composer require xskit/laravel-rabbitmq
 ```
 ## 使用方法
 
-安装后使用 Laravel 自动发现，包将自动注册自己。
-修改配置可以根据 `config/queue.php` 配置项配置到 `.env`文件中，或者添加配置到 `config/queue.php` 进行配置修改
+### Laravel
+安装后使用 Laravel 自动发现,包将自动注册自己。
 
-开始队列监听  
+### Lumen
+手动注册服务提供者
+```php
+$app->register(XsKit\LaravelRabbitMQ\RabbitMQServiceProvider::class);
+```
+
+### 配置
+修改配置可以根据 `config/queue.php` 配置到 `.env`文件中，或者添加配置到 `config/queue.php` 进行配置修改
+
+### 开始队列监听  
 比原laravel队列 多一个配置项 `--routing` 做为rabbitmq 的 routing_key配置
 - 使用方式
 ```
