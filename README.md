@@ -15,16 +15,31 @@ $app->register(XsKit\LaravelRabbitMQ\RabbitMQServiceProvider::class);
 ### 配置
 修改配置可以根据 `config/queue.php` 配置到 `.env`文件中，或者添加配置到 `config/queue.php` 进行配置修改
 
-### 开始队列监听  
-比原laravel队列 多一个配置项 `--routing` 做为rabbitmq 的 routing_key配置
+### 队列监听，开始消费消息
+
 - 使用方式
 ```
-$ php artisan rabbitmq:work [options] [--] [<connection>] [--routing=<key>]
+$ php artisan rabbitmq:work [options] [--] [<connection>] [--routing=<key>] [--no-ack]
 ```
 - 查看help
 ```
 $ php artisan rabbitmq:work --help
 ```
+**选项**  
+    --queue[=QUEUE]      工作队列名  
+    --routing[=ROUTING]  消息路由  
+    --no-ack             关闭消息确认  
+    --daemon             以守护进程模式运行工作程序 (弃用)  
+    --once               只处理队列上的下一个作业  
+    --delay[=DELAY]      延迟失败作业的秒数 [default: "0"]  
+    --force              强制在维护模式下运行  
+    --memory[=MEMORY]    内存限制，以 M 为单位( [default: "128"]  
+    --sleep[=SLEEP]     没有工作时睡觉的秒数 [default: "3"]  
+    --timeout[=TIMEOUT]  子进程可以运行的秒数 [default: "60"]  
+    --tries[=TRIES]      在记录作业失败之前尝试该作业的次数 [default: "0"]  
+
+
+
 ## 消息处理的方式
 - 消息确认机制的说明，与 Laravel 队列 Job 的处理保持一致
     - Job 执行失败时，自动确认消息后进行消息重发
