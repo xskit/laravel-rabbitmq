@@ -83,10 +83,13 @@ class WorkCommand extends Command
         // connection being run for the queue operation currently being executed.
         $queue = $this->getQueue($connection);
 
-        $routing_key = $this->getRoutingKey() ?: $queue;
+        $options = [
+            'routing_key' => $this->getRoutingKey() ?: $queue,
+            'no_ack' => $this->option('no-ack')
+        ];
 
         $this->runWorker(
-            $connection, $queue, $routing_key
+            $connection, $queue, $options
         );
     }
 
@@ -95,14 +98,14 @@ class WorkCommand extends Command
      *
      * @param  string $connection
      * @param  string $queue
-     * @param $routing_key
+     * @param  array $options
      * @return array
      */
-    protected function runWorker($connection, $queue, $routing_key)
+    protected function runWorker($connection, $queue, $options)
     {
         $this->worker->setCache($this->laravel['cache']->driver());
 
-        return $this->worker->setRoutingKey($routing_key)->{$this->option('once') ? 'runNextJob' : 'daemon'}(
+        return $this->worker->setOptions($options)->{$this->option('once') ? 'runNextJob' : 'daemon'}(
             $connection, $queue, $this->gatherWorkerOptions()
         );
     }
