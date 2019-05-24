@@ -3,12 +3,11 @@
 composer require xskit/laravel-rabbitmq
 ```
 ## 使用方法
-
 ### Laravel
 安装后使用 Laravel 自动发现,包将自动注册自己。
 
 ### Lumen
-手动注册服务提供者
+对于Lumen的使用，服务提供者应该手动注册，`bootstrap/app.php` 如下面所示:
 ```php
 $app->register(XsKit\LaravelRabbitMQ\RabbitMQServiceProvider::class);
 ```
