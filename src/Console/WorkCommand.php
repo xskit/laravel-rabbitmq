@@ -22,6 +22,7 @@ class WorkCommand extends Command
                             {connection? : 队列连接的名称}
                             {--queue= : 工作队列名}
                             {--routing= : 消息路由}
+                            {--no-ack : 关闭消息确认}
                             {--daemon : 以守护进程模式运行工作程序 (弃用)}
                             {--once : Only process the next job on the queue}
                             {--delay=0 : The number of seconds to delay failed jobs}
@@ -82,10 +83,13 @@ class WorkCommand extends Command
         // connection being run for the queue operation currently being executed.
         $queue = $this->getQueue($connection);
 
-        $routing_key = $this->getRoutingKey() ?: $queue;
+        $options = [
+            'routing_key' => $this->getRoutingKey() ?: $queue,
+            'no_ack' => $this->option('no-ack')
+        ];
 
         $this->runWorker(
-            $connection, $queue, $routing_key
+            $connection, $queue, $options
         );
     }
 
@@ -94,14 +98,14 @@ class WorkCommand extends Command
      *
      * @param  string $connection
      * @param  string $queue
-     * @param $routing_key
+     * @param $options
      * @return array
      */
-    protected function runWorker($connection, $queue, $routing_key)
+    protected function runWorker($connection, $queue, $options)
     {
         $this->worker->setCache($this->laravel['cache']->driver());
 
-        return $this->worker->setRoutingKey($routing_key)->{$this->option('once') ? 'runNextJob' : 'daemon'}(
+        return $this->worker->setOptions($options)->{$this->option('once') ? 'runNextJob' : 'daemon'}(
             $connection, $queue, $this->gatherWorkerOptions()
         );
     }
@@ -109,7 +113,6 @@ class WorkCommand extends Command
     /**
      * Gather all of the queue worker options as a single object.
      *
-     * @param string $routing_key
      * @return WorkerOptions
      */
     protected function gatherWorkerOptions()

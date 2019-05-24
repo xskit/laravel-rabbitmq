@@ -2,8 +2,8 @@
 
 namespace XsKit\LaravelRabbitMQ\Queue;
 
+use Illuminate\Support\Arr;
 use Interop\Amqp\AmqpConsumer;
-use Interop\Queue\Consumer;
 use XsKit\LaravelRabbitMQ\Contracts\QueueAutoDeclare;
 use XsKit\LaravelRabbitMQ\Contracts\QueueNotDeclare;
 use RuntimeException;
@@ -31,7 +31,10 @@ class RabbitMQQueue extends Queue implements QueueContract
 
     protected $job;
 
-    protected $routingKey;
+    protected $optionRoutingKey;
+
+    protected $optionNoAck;
+
 
     /**
      * @var AmqpContext
@@ -160,6 +163,18 @@ class RabbitMQQueue extends Queue implements QueueContract
         ]);
     }
 
+    /**
+     * 设置路由
+     * @param array $value
+     * @return $this
+     */
+    public function setOptions($value)
+    {
+        $this->optionRoutingKey = Arr::get($value, 'routing_key');
+        $this->optionNoAck = Arr::get($value, 'no_ack');
+        return $this;
+    }
+
     /** {@inheritdoc} */
     public function pop($queueName = null)
     {
@@ -168,8 +183,11 @@ class RabbitMQQueue extends Queue implements QueueContract
             list($queue) = $this->declareEverything($queueName);
 
             $consumer = $this->context->createConsumer($queue);
-            // Messages are automatically redistributed when a job fails, so no ack mode is required to turn on.
-            $consumer->addFlag(AmqpConsumer::FLAG_NOACK);
+
+            if ($this->optionNoAck) {
+                // no_ack
+                $consumer->addFlag(AmqpConsumer::FLAG_NOACK);
+            }
 
             if ($message = $consumer->receiveNoWait()) {
                 return new RabbitMQJob($this->container, $this, $consumer, $message);
@@ -268,17 +286,6 @@ class RabbitMQQueue extends Queue implements QueueContract
         }
 
         return [$queue, $topic];
-    }
-
-    /**
-     * 设置路由
-     * @param $routing_key
-     * @return $this
-     */
-    public function setRoutingKey($routing_key)
-    {
-        $this->routingKey = $routing_key;
-        return $this;
     }
 
     protected function getQueueName($queueName = null)
