@@ -39,7 +39,6 @@ $ php artisan rabbitmq:work --help
     --tries[=TRIES]      在记录作业失败之前尝试该作业的次数 [default: "0"]  
 
 
-
 ## 消息处理的方式
 - 消息确认机制的说明，与 Laravel 队列 Job 的处理保持一致
     - Job 执行失败时，自动确认消息后进行消息重发
