@@ -22,6 +22,7 @@ class WorkCommand extends Command
                             {connection? : 队列连接的名称}
                             {--queue= : 工作队列名}
                             {--routing= : 消息路由}
+                            {--no-ack : 关闭消息确认}
                             {--daemon : 以守护进程模式运行工作程序 (弃用)}
                             {--once : Only process the next job on the queue}
                             {--delay=0 : The number of seconds to delay failed jobs}
