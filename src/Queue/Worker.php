@@ -15,18 +15,23 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
 class Worker extends \Illuminate\Queue\Worker
 {
 
-    protected $routingKey;
+    protected $options;
 
-    public function setRoutingKey($key)
+    /**
+     * set topic exchange routing key
+     * @param array $value
+     * @return $this
+     */
+    public function setOptions($value)
     {
-        $this->routingKey = $key;
+        $this->options = $value;
         return $this;
     }
 
     /**
      * Get the next job from the queue connection.
      *
-     * @param  \Illuminate\Contracts\Queue\Queue $connection
+     * @param  RabbitMQQueue $connection
      * @param  string $queue
      * @return \Illuminate\Contracts\Queue\Job|null
      */
@@ -34,7 +39,7 @@ class Worker extends \Illuminate\Queue\Worker
     {
         try {
             foreach (explode(',', $queue) as $queue) {
-                if (!is_null($job = $connection->setRoutingKey($this->routingKey)->pop($queue))) {
+                if (!is_null($job = $connection->setOptions($this->options)->pop($queue))) {
                     return $job;
                 }
             }
