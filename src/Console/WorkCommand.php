@@ -37,7 +37,7 @@ class WorkCommand extends Command
      *
      * @var string
      */
-    protected $description = '以守护进程的身份开始处理RabbitMQ队列上的作业';
+    protected $description = '以守护进程的身份(consumer)开始处理 RabbitMQ 队列上的作业';
 
     /**
      * The queue worker instance.
