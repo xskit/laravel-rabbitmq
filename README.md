@@ -48,7 +48,7 @@ $ php artisan rabbitmq:work --help
      $job->delete();
     ```
     
-## 使用示例
+## Laravel 使用示例
 - 场景一
     - 后台处理长时任务  
       
