@@ -37,6 +37,13 @@ class RabbitMQServiceProvider extends ServiceProvider implements DeferrableProvi
         $this->mergeConfigFrom(
             __DIR__ . '/../config/rabbitmq.php', 'queue.connections.rabbitmq'
         );
+
+        /** @var QueueManager $queue */
+        $queue = $this->app['queue'];
+
+        $queue->addConnector('rabbitmq', function () {
+            return new RabbitMQConnector($this->app['events']);
+        });
     }
 
     /**
@@ -46,12 +53,7 @@ class RabbitMQServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function boot(): void
     {
-        /** @var QueueManager $queue */
-        $queue = $this->app['queue'];
 
-        $queue->addConnector('rabbitmq', function () {
-            return new RabbitMQConnector($this->app['events']);
-        });
     }
 
     public function provides()
