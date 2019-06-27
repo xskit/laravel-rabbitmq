@@ -10,7 +10,7 @@ use Illuminate\Support\ServiceProvider;
 use XsKit\LaravelRabbitMQ\Queue\Connectors\RabbitMQConnector;
 use XsKit\LaravelRabbitMQ\Queue\Worker;
 
-class RabbitMQServiceProvider extends ServiceProvider implements DeferrableProvider
+class RabbitMQServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.
